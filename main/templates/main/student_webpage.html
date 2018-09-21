@@ -1,0 +1,84 @@
+<!-- loads the path to yout static files -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}" />
+
+<h1> Name - {{ student.name }}<br>
+    Roll Number - {{ student.roll_no }}<br>
+    Webmail ID - {{ student.webmail }}<br>
+</h1>
+
+
+<br><br>
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<ul>
+    {% if student.caretaker_approval is True %}
+        <b><li>Caretaker has Approved</li><br>
+    {% else %}
+        <b><li>Caretaker has not Approved</li><br>
+    {% endif %}
+    {% if student.warden_approval is True %}
+        <b><li>Warden has Approved</li><br>
+    {% else %}
+        <b><li>Warden has not Approved</li><br>
+    {% endif %}
+    {% if student.gymkhana_approval is True %}
+        <b><li>Gymkhana has Approved</li><br>
+    {% else %}
+        <b><li>Gymkhana has not Approved</li><br>
+    {% endif %}
+    {% if student.assistant_registrar_approval is True %}
+        <b><li>Assistant Registrar has Approved</li><br>
+    {% else %}
+        <b><li>Assistant Registrar has not Approved</li><br>
+    {% endif %}
+    {% if student.submit_thesis is True %}
+        <b><li>Submit Thesis Approved</li><br>
+    {% else %}
+        <b><li>Submit Thesis has not Approved</li><br>
+    {% endif %}
+    {% if student.library_approval is True %}
+        <b><li>Library has Approved</li><br>
+    {% else %}
+        <b><li>Library has not Approved</li><br>
+    {% endif %}
+    {% if student.online_cc_approval is True %}
+        <b><li>Online CC has Approved</li><br>
+    {% else %}
+        <b><li>Online CC has not Approved</li><br>
+    {% endif %}
+    {% if student.CC_approval is True %}
+        <b><li>Computer Centre has Approved</li><br>
+    {% else %}
+        <b><li>Computer Centre has not Approved</li><br>
+    {% endif %}
+    {% if student.dept_status is True %}
+        <b><li>Department has Approved</li><br>
+    {% else %}
+        <b><li>Department has not Approved</li><br>
+    {% endif %}
+    {% if student.lab_status is True %}
+        <b><li>Lab/Workshop has Approved</li><br>
+    {% else %}
+        <b><li>Lab/Workshop has not Approved</li><br>
+    {% endif %}
+    {% if student.HOD_approval is True %}
+        <b><li>HOD has Approved</li><br>
+    {% else %}
+        <b><li>HOD has not Approved</li><br>
+    {% endif %}
+    {% if student.account_approval is True %}
+        <b><li>Account has Approved</li><br>
+    {% else %}
+        <b><li>Account has not Approved</li><br>
+    {% endif %}
+</ul>
+
+
+<form action="../logout/" method="post">
+    {% csrf_token %}
+    <input type="submit" value="logout">
+</form>
+

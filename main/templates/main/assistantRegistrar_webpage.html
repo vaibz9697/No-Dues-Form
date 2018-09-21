@@ -1,0 +1,51 @@
+<!-- loads the path to yout static files -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}" />
+
+
+<h1> Name - {{ teacher.name }}<br>
+     Webmail - {{ teacher.webmail }}<br>
+    Department - {{ teacher.department }}
+</h1>
+
+
+<br><br>
+
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {%for s in students %}
+        {% if s.warden_approval is True %}
+            {% if s.gymkhana_approval is True %}
+                {% if s.library_approval is True %}
+                    {% if s.CC_approval is True %}
+                        {% if s.dept_status is True %}
+                            {% if s.lab_status is True %}
+                                {% if s.assistant_registrar_approval is False %}
+                                    <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="{{ s.webmail }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ s.name }}</p>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    <input type="submit" value="no_dues_req">
+</form>
+
+{% for s in students %}
+    {% if s.assistant_registrar_approval is True %}
+        <li>{{ s.name }}</li>
+    {% endif %}
+{% endfor %}
+
+<form action="../logout/" method="post">
+    {% csrf_token %}
+    <input type="submit" value="logout">
+</form>
+

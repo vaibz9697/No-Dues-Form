@@ -1,0 +1,38 @@
+<!-- loads the path to yout static files -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}" />
+
+
+<h1> Name - {{ lab.name }}<br>
+     Webmail - {{ lab.webmail }}<br>
+</h1>
+
+
+<br><br>
+
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {%for sls in studentLabStatus %}
+        {% if sls.lab_approval is False %}
+            <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="{{ sls.student.webmail }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ sls.student.name }}</p>
+        {% endif %}
+    {% endfor %}
+    <input type="submit" value="no_dues_req">
+</form>
+
+{% for sls in studentLabStatus %}
+    {% if sls.lab_approval is True %}
+        <li>{{ sls.student.name }}</li>
+    {% endif %}
+{% endfor %}
+
+<form action="../logout/" method="post">
+    {% csrf_token %}
+    <input type="submit" value="logout">
+</form>
+

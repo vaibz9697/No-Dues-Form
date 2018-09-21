@@ -1,0 +1,48 @@
+<!-- loads the path to yout static files -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}" />
+
+
+<h1> Name - {{ teacher.name }}<br>
+     Webmail - {{ teacher.webmail }}
+</h1>
+
+
+<br><br>
+
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {% for s in students %}
+        {% for t in studentFacultyStatus %}
+            {% if t.student.name == s.name %}
+                {% if t.faculty_approval is False %}
+                    <input type="checkbox" id="s{{ forloop.counter }}" name="{{ s.webmail }}"/>
+                    <label for = "t{{ forloop.counter }} ">
+                        {{ s.name }}
+                    </label>
+                    <br><br>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    <input type="submit" value="no_dues_req">
+</form>
+
+{% for t in studentFacultyStatus %}
+    {% if teacher.name == t.faculty.name %}
+        {% if t.faculty_approval is True %}
+            <li>{{ t.student.name }}</li>
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+<form action="../logout/" method="post">
+    {% csrf_token %}
+    <input type="submit" value="logout">
+</form>
+

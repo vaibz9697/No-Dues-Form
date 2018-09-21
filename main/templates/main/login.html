@@ -1,0 +1,25 @@
+<!-- loads the path to yout static files -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}" />
+
+<form action="" method="post">
+    {% csrf_token %}
+    Webmail : <br><input type="text" name="webmail"><br>
+    Password : <br><input type="password" name="password"><br>
+    Role:&nbsp;&nbsp;&nbsp;<select name="role">
+        <option value="student">Student</option>
+        <option value="faculty">Faculty</option>
+        <option value="warden">Warden</option>
+        <option value="caretaker">Caretaker</option>
+        <option value="hod">HOD</option>
+        <option value="assistantRegistrar">Assistant Registrar</option>
+        <option value="lab">Lab</option>
+        <option value="library">Library</option>
+        <option value="gymkhana">Gymkhana</option>
+        <option value="ccentre">CC</option>
+        <option value="onlineCC">Online CC</option>
+        <option value="thesisManager">Submit Thesis</option>
+        <option value="Account">Account</option>
+    </select><br>
+    <input type="submit" value="no_dues_req">
+</form>
